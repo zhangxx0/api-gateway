@@ -19,12 +19,24 @@ spring:
             - Path=/demo/**
           filters:
             - StripPrefix=1
+            - AddResponseHeader=X-Response-Red, Blue
         - id: baidu_route
           uri: http://baidu.com:80/
           predicates:
             - Path=/baidu/**
           filters:
             - StripPrefix=1
+        - id: productLimit
+          uri: lb://PRODUCT
+          predicates:
+            - Path=/prolimit/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 3
 
       #当访问http://localhost:8080/baidu,直接转发到https://www.baidu.com/
 #      routes:
