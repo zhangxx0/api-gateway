@@ -1,5 +1,6 @@
 package com.xinxin.apigateway;
 
+import com.xinxin.apigateway.filter.SimpleAuthFilter;
 import com.xinxin.apigateway.filter.TokenFilter;
 import com.xinxin.apigateway.resolver.HostAddrKeyResolver;
 import com.xinxin.apigateway.resolver.UriKeyResolver;
@@ -21,6 +22,11 @@ public class ApiGatewayApplication {
     @Bean
     public TokenFilter tokenFilter() {
         return new TokenFilter();
+    }
+
+    @Bean
+    public SimpleAuthFilter simpleAuthFilter() {
+        return new SimpleAuthFilter();
     }
 
     @Bean
