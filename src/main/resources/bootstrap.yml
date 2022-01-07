@@ -1,81 +1,16 @@
 spring:
   application:
     name: gateway
-  zipkin:
-    sender:
-      type: web
-    base-url: http://localhost:9411/
-    service:
-      name: gateway
-  sleuth:
-    sampler:
-      probability: 1
+
   cloud:
-    config:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        prefix: gateway
       discovery:
-        enabled: true
-        service-id: CONFIG
-      profile: dev
-    sentinel:
-      transport:
-        port: 15000
-        dashboard: localhost:8748
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lowerCaseServiceId: true
-      routes:
-        - id: config111
-          uri: lb://CONFIG
-          predicates:
-            - Path=/demo/**
-          filters:
-            - StripPrefix=1
-            - AddResponseHeader=X-Response-Red, Blue
-        - id: baidu_route
-          uri: http://baidu.com:80/
-          predicates:
-            - Path=/baidu/**
-          filters:
-            - StripPrefix=1
-        - id: productLimit
-          uri: lb://PRODUCT
-          predicates:
-            - Path=/prolimit/**
-          filters:
-            - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@hostAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 3
+        server-addr: 127.0.0.1:8848
+  profiles:
+    active: dev
 
-      #当访问http://localhost:8080/baidu,直接转发到https://www.baidu.com/
-#      routes:
-#        - id: baidu_route
-#          uri: http://baidu.com:80/
-#          predicates:
-#            - Path=/baidu/**
-#          filters:
-#            - StripPrefix=1
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-    enabled: false
-
-# Spring Cloud Gateway 日志配置
-logging:
-  level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.http.server.reactive: DEBUG
-    org.springframework.web.reactive: DEBUG
-    reactor.ipc.netty: DEBUG

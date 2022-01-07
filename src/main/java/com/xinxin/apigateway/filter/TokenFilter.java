@@ -1,6 +1,6 @@
 package com.xinxin.apigateway.filter;
 
-import org.apache.commons.lang.StringUtils;
+import com.alibaba.cloud.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

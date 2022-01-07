@@ -1,7 +1,6 @@
 package com.xinxin.apigateway.filter;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.netflix.discovery.converters.Auto;
 import com.xinxin.apigateway.constant.RedisConstant;
 import com.xinxin.apigateway.util.CookieUtil;
 import io.micrometer.core.instrument.util.JsonUtils;

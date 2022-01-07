@@ -19,7 +19,7 @@ public class ApiGatewayApplication {
     }
 
     // TokenFilter在工程的启动类中注入
-    @Bean
+    /*@Bean
     public TokenFilter tokenFilter() {
         return new TokenFilter();
     }
@@ -27,12 +27,12 @@ public class ApiGatewayApplication {
     @Bean
     public SimpleAuthFilter simpleAuthFilter() {
         return new SimpleAuthFilter();
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public HostAddrKeyResolver hostAddrKeyResolver() {
         return new HostAddrKeyResolver();
-    }
+    }*/
 
 //    @Bean
 //    public UriKeyResolver uriKeyResolver() {
